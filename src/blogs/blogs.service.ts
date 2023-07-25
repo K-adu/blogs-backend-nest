@@ -39,4 +39,8 @@ export class BlogsService {
     }
     return await this.blogsRepository.deleteBlogRepository(data);
   }
+
+  async getAllBlogsService(userId) {
+    return this.blogsRepository.getAllBlogsRepository(userId);
+  }
 }

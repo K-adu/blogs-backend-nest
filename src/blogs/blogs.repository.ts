@@ -26,4 +26,8 @@ export class BlogsRepository {
   async deleteBlogRepository(data) {
     return await this.blogModel.findByIdAndDelete(data.blogId);
   }
+
+  async getAllBlogsRepository(userId) {
+    return await this.blogModel.find({ postedBy: userId });
+  }
 }

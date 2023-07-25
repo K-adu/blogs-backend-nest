@@ -21,14 +21,14 @@ import { UpdateBlogDTO } from './dto/update-blog.dto';
 @UseGuards(AuthGuard, RolesGuard)
 export class BlogsController {
   constructor(private blogsService: BlogsService) {}
-  // create new blogs
+  // create
   @Post('/create')
   @Roles(Role.NormalUser)
   async createBlogController(@Body() body: CreateBlogDTO, @Request() req) {
     return await this.blogsService.createBlogService(body, req);
   }
 
-  //update exiting blogs- for this need blog id, userid(it is in the req) and body of what we are updating
+  //update exiting blogs
   @Patch('/update/:id')
   @Roles(Role.NormalUser)
   async updateBlogController(
@@ -39,14 +39,21 @@ export class BlogsController {
     return await this.blogsService.updateBlogService(body, req, id);
   }
 
-  //delete a blog - for this need blog id and userid of the logged in user
+  //delete a blog
   @Delete('/delete/:id')
   @Roles(Role.NormalUser)
   async deleteBlogController(@Request() req, @Param('id') id: string) {
     return await this.blogsService.deleteBlogService(req, id);
   }
-  //get all blog of the logged in user - for this needed user id
+  //get all blog of the logged in user
+  @Get('/my')
+  @Roles(Role.NormalUser)
+  async getAllBlogsController(@Request() req) {
+    return this.blogsService.getAllBlogsService(req.user.id);
+  }
+
   //get a blog using id- for this need blogs id
+
   //get public blogs of other users - for this need the user email,
   //search matching blogs using keys
 }
