@@ -15,9 +15,9 @@ export class User extends Document {
   @Prop({ type: String, default: 'Normal' })
   role: string;
 
-  // this holds the post that the user posted( one to many relation)
-  // @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'Post' }] })
-  // posts: Post[];
+  // this holds the blogs that the user posted( one to many relation)
+  // @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'Blog' }] })
+  // blogs: Blog[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
