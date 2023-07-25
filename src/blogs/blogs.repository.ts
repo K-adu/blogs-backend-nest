@@ -30,4 +30,17 @@ export class BlogsRepository {
   async getAllBlogsRepository(userId) {
     return await this.blogModel.find({ postedBy: userId });
   }
+
+  async getOtherBlogsRepository(email: string) {
+    return this.blogModel.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'postedBy',
+          foreignField: '_id',
+          as: 'authorData',
+        },
+      },
+    ]);
+  }
 }

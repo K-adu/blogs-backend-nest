@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -16,6 +17,7 @@ import { RolesGuard } from 'src/shared/guard/role.guard';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { BlogsService } from './blogs.service';
 import { UpdateBlogDTO } from './dto/update-blog.dto';
+import { query } from 'express';
 
 @Controller('blogs')
 @UseGuards(AuthGuard, RolesGuard)
@@ -52,8 +54,13 @@ export class BlogsController {
     return this.blogsService.getAllBlogsService(req.user.id);
   }
 
-  //get a blog using id- for this need blogs id
-
   //get public blogs of other users - for this need the user email,
+  //needs email of the user
+  @Get('/users')
+  @Roles(Role.NormalUser)
+  async getOtherBlogsController(@Query() query) {
+    return await this.blogsService.getOtherBlogsService(query);
+  }
+
   //search matching blogs using keys
 }

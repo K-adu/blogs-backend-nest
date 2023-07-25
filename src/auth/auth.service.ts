@@ -23,6 +23,7 @@ export class AuthService {
     }
     if (user.password === body.password) {
       const payload = { id: user._id, email: user.email, role: user.role };
+      console.log(payload);
       return {
         access_token: await this.jwtService.signAsync(payload),
       };

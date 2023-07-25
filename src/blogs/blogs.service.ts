@@ -41,6 +41,11 @@ export class BlogsService {
   }
 
   async getAllBlogsService(userId) {
-    return this.blogsRepository.getAllBlogsRepository(userId);
+    return await this.blogsRepository.getAllBlogsRepository(userId);
+  }
+
+  async getOtherBlogsService(query) {
+    const email = query.email;
+    return await this.blogsRepository.getOtherBlogsRepository(email);
   }
 }

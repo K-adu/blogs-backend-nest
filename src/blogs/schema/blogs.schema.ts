@@ -9,11 +9,11 @@ export class Blog extends Document {
 
   //reference of the user id of the post who posted it
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-  postedBy: User;
+  postedBy: Types.ObjectId;
 
   //reference of the comments that the post holds
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Comment' }] })
-  comments: Comment[];
+  comments: Types.ObjectId[];
 
   @Prop()
   likeCount: number;
@@ -23,7 +23,7 @@ export class Blog extends Document {
 
   // reference of the likes the post holds
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Like' }] })
-  likes: Like[];
+  likes: Types.ObjectId[];
 
   // You can add other post-related properties here
 }
