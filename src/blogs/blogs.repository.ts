@@ -14,7 +14,6 @@ export class BlogsRepository {
       ...data,
       postedBy: user.id,
     };
-    console.log(addtoDbData);
     return await this.blogModel.create(addtoDbData);
   }
   async updateBlogRepository(data) {

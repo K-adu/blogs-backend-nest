@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -9,6 +10,7 @@ import {
   Query,
   Request,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/role.enum';
@@ -20,6 +22,7 @@ import { UpdateBlogDTO } from './dto/update-blog.dto';
 import { query } from 'express';
 
 @Controller('blogs')
+// @UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard, RolesGuard)
 export class BlogsController {
   constructor(private blogsService: BlogsService) {}
