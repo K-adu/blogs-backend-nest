@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 import { Blog } from 'src/blogs/schema/blogs.schema';
 import { User } from 'src/user/schema/user.schema';
 
@@ -9,11 +9,11 @@ export class Comment extends Document {
   content: string;
 
   //the user id who posted the given comment
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
   commentedBy: User;
 
   //the post for which the comment belongs to
-  @Prop({ type: Types.ObjectId, ref: 'Blog', required: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Blog', required: true })
   commentOfBlog: Blog;
 
   // You can add other comment-related properties here

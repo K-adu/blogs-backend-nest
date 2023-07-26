@@ -9,8 +9,13 @@ export class BlogsRepository {
     @InjectModel(Blog.name) private blogModel: mongoose.Model<Blog>,
   ) {}
 
-  async createBlogRepository(data) {
-    return this.blogModel.create(data);
+  async createBlogRepository(data, user) {
+    const addtoDbData = {
+      ...data,
+      postedBy: user.id,
+    };
+    console.log(addtoDbData);
+    return await this.blogModel.create(addtoDbData);
   }
   async updateBlogRepository(data) {
     return await this.blogModel.findByIdAndUpdate(data.blogId, data.body);
@@ -39,6 +44,25 @@ export class BlogsRepository {
           localField: 'postedBy',
           foreignField: '_id',
           as: 'authorData',
+        },
+      },
+      {
+        $unwind: '$authorData',
+      },
+      {
+        $match: { 'authorData.email': email },
+      },
+    ]);
+  }
+
+  async searchBlogRepository(key) {
+    return await this.blogModel.aggregate([
+      {
+        $match: {
+          title: {
+            $regex: key,
+            $options: 'i',
+          },
         },
       },
     ]);

@@ -8,11 +8,7 @@ export class BlogsService {
   constructor(private blogsRepository: BlogsRepository) {}
 
   async createBlogService(body: CreateBlogDTO, req) {
-    const data = {
-      ...body,
-      postedBy: req.user.id,
-    };
-    return await this.blogsRepository.createBlogRepository(data);
+    return await this.blogsRepository.createBlogRepository(body, req.user);
   }
 
   async updateBlogService(body: UpdateBlogDTO, req, id: string) {
@@ -47,5 +43,10 @@ export class BlogsService {
   async getOtherBlogsService(query) {
     const email = query.email;
     return await this.blogsRepository.getOtherBlogsRepository(email);
+  }
+
+  async searchBlogController(query) {
+    const key = query.key;
+    return await this.blogsRepository.searchBlogRepository(key);
   }
 }

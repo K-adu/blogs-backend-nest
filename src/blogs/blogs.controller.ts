@@ -63,4 +63,9 @@ export class BlogsController {
   }
 
   //search matching blogs using keys
+  @Get('/search')
+  @Roles(Role.NormalUser)
+  async searchBlogController(@Query() query) {
+    return await this.blogsService.searchBlogController(query);
+  }
 }
