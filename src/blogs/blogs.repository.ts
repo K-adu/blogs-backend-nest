@@ -47,11 +47,28 @@ export class BlogsRepository {
         },
       },
       {
-        $unwind: '$authorData',
+        $project: {
+          isLocked: 0,
+          'authorData.role': 0,
+          'authorData.email': 0,
+        },
       },
       {
-        $match: { 'authorData.email': email },
+        $lookup: {
+          from: 'comments',
+          localField: 'comments',
+          foreignField: '_id',
+          as: 'comments',
+        },
       },
+      {
+        $project: {
+          'comments.commentOfBlog': 0,
+        },
+      },
+      // {
+      //   $match: { 'authorData.email': email },
+      // },
     ]);
   }
 
