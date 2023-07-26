@@ -28,8 +28,6 @@ export class Blog extends Document {
   // reference of the likes the post holds
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Like' }] })
   likes: Types.ObjectId[];
-
-  // You can add other post-related properties here
 }
 
 export const BlogSchema = SchemaFactory.createForClass(Blog);

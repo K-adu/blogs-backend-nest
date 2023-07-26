@@ -15,8 +15,6 @@ export class Comment extends Document {
   //the post for which the comment belongs to
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Blog', required: true })
   commentOfBlog: Blog;
-
-  // You can add other comment-related properties here
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);
