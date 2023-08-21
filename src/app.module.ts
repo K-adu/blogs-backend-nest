@@ -18,7 +18,7 @@ import { JwtModule } from '@nestjs/jwt';
     LikesModule,
     AuthModule,
     BlogsModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/socialmedianest'),
+    MongooseModule.forRoot('mongodb://localhost:27017/myblog'),
     SharedModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
